@@ -67,102 +67,94 @@ mern-ecommerce/
 ## ⚙️ Cấu hình môi trường (server/.env)
 Tạo file `server/.env`:
 ```
-NODE_ENV=development
-PORT=5000
-MONGO_URI=mongodb+srv://<your-user>:<your-pass>@<cluster>/<db>?retryWrites=true&w=majority
-```
+<div align="center">
+  <h1>Bandai / Gundam Store (MERN)</h1>
+  <strong>Minimal portfolio-ready MERN demo for model kits & figures</strong>
+  <br/>
+  <sub>MongoDB · Express · React 18 · Node · MUI</sub>
+</div>
 
-## 🧪 Data Seeding
-Script: `server/seed.js`
+## 1. Overview
+Ứng dụng ecommerce demo: duyệt danh mục (Gunpla / Figures / Model Kits / Phụ kiện), xem sản phẩm, wishlist, giỏ hàng (client state), seed dữ liệu nhanh. Tập trung vào trình bày UI + kiến trúc rõ ràng thay vì đủ tính năng production.
 
-Commands (run inside `server/`):
+## 2. Core Features
+- Featured landing: hero + danh mục động (click → `/shop?category=...` + auto scroll)
+- Product card: hover đổi ảnh, add to cart / wishlist
+- Cart modal: xem nhanh, tính tổng
+- Wishlist đơn giản có badge
+- Seed script: 2 ảnh mỗi sản phẩm, flags `--force` / `--append`
+
+## 3. Demo Screenshots
+(Thêm các file ảnh vào `docs/` rồi cập nhật đường dẫn nếu khác.)
+
+| Home Hero | Featured Categories | Featured Items |
+|-----------|--------------------|----------------|
+| ![Home](docs/demo-home.png) | ![Categories](docs/demo-categories.png) | ![Featured](docs/demo-featured.png) |
+
+| Shop (Gunpla) | Cart Modal | Wishlist |
+|---------------|-----------|----------|
+| ![Shop](docs/demo-shop-gunpla.png) | ![Cart](docs/demo-cart.png) | ![Wishlist](docs/demo-wishlist.png) |
+
+> Bạn đã gửi ảnh demo: hãy lưu lần lượt (ví dụ) vào:  
+> `docs/demo-home.png`, `docs/demo-categories.png`, `docs/demo-featured.png`, `docs/demo-shop-gunpla.png`, `docs/demo-cart.png`, `docs/demo-wishlist.png`.
+
+## 4. Quick Start
 ```bash
-npm run seed          # Insert initial dataset if empty
-node seed.js --append # Insert only new items (idempotent by name)
-node seed.js --force  # Wipe category items then reinsert full dataset
-```
-
-Image prerequisites: place matching files in `server/public/<category>/<filename>` (already structured for sample dataset).
-
-## ▶️ Chạy dự án cục bộ
-Mở 2 terminal (hoặc dùng split pane).
-
-Terminal 1 (Server):
-```bash
+# Backend
 cd server
 npm install
-npm run dev   # dùng nodemon
-```
+cp .env.example .env   # (tạo nếu chưa có) 
+npm run dev
 
-Terminal 2 (Client):
-```bash
+# Frontend (tab khác)
 cd client
 npm install
 npm start
 ```
+Mặc định API: http://localhost:5000/api
 
-Mặc định frontend gọi API: `http://localhost:5000/api/...`
-
-## 🛣 API chính
-| Method | Endpoint            | Query               | Mô tả |
-|--------|---------------------|---------------------|-------|
-| GET    | /api/items          | ?category=&limit=   | Lấy danh sách sản phẩm (lọc theo category + giới hạn) |
-| POST   | /api/payment        | body {amount,...}   | (Placeholder) tạo URL thanh toán (demo) |
-
-Response mẫu `/api/items`:
-```json
-[
-  {
-    "_id": "...",
-    "name": "HG 1/144 Aerial (WfM)",
-    "category": "gunpla",
-    "price": 18,
-    "image": [ { "filename": "placeholder-gunpla-aerial.jpg" }, { "filename": "placeholder-gunpla-aerial1.jpg" } ]
-  }
-]
+### Environment (`server/.env`)
+```
+NODE_ENV=development
+PORT=5000
+MONGO_URI=mongodb+srv://<user>:<pass>@<cluster>/<db>?retryWrites=true&w=majority
 ```
 
-## 🖼 Ảnh & helper
-- Ảnh tĩnh: `server/public/<category>/<filename>`
-- Frontend helper: `buildImageUrl(category, filename)` tạo URL như: `http://localhost:5000/<category>/<filename>`
+## 5. Seed Data
+Chạy trong thư mục `server/`:
+```bash
+npm run seed          # tạo nếu trống
+node seed.js --append # thêm item mới
+node seed.js --force  # xóa & tạo lại
+```
+Ảnh: `server/public/<category>/<filename>`.
 
-## 🔍 Điều hướng & Routing
-- Category card: `/shop?category=gunpla` (auto scroll tới section)
-- Route cũ `/category/:id` vẫn tồn tại (CategoryView) nhưng trang chủ đã chuyển sang cơ chế query param.
+## 6. API (rút gọn)
+| Method | Endpoint | Params | Mô tả |
+|--------|----------|--------|-------|
+| GET | /api/items | ?category=&limit= | Danh sách / lọc theo category |
+| POST | /api/payment | amount | Placeholder demo |
 
-## 🚧 Roadmap / Next Steps
-- [ ] Persist cart + wishlist to localStorage
-- [ ] Add product search (server-side filtering & indexing)
-- [ ] Authentication & JWT session (user accounts, protected routes)
-- [ ] Admin panel (CRUD products, bulk image upload)
-- [ ] Pricing / inventory fields (stock, discount, pre-order flag)
-- [ ] Centralized error boundary + toast system
-- [ ] Responsive image optimization / lazy loading
-- [ ] Unit + integration tests (Jest / React Testing Library / Supertest)
-- [ ] Docker compose for one-command startup
+## 7. Tech Stack
+React 18, React Router 6, MUI, Axios, Express 4, Mongoose 6.
 
-## 🧱 Công nghệ
-- React 18 + React Router 6
-- Material UI + Bootstrap
-- Axios
-- Express 4 + Mongoose 6
-- Multer (chuẩn bị cho upload)
+## 8. Folder Snapshot
+```
+client/      # React UI
+server/      # Express API + static assets
+server/public/<category>/images
+server/seed.js
+```
 
-## 🐛 Current Limitations / Trade-offs
-- Cart & wishlist not persisted across reloads (intentional simplification)
-- No authentication / authorization layer yet
-- Payment route is placeholder (stub for integration approach)
-- No pagination or server-side sorting (client handles small dataset)
-- Minimal error handling / validation on create/update (not exposed yet)
+## 9. Roadmap (ngắn gọn)
+- Persist cart/wishlist
+- Auth + admin CRUD
+- Search & filter nâng cao
+- Pagination & image optimization
 
-## 📜 License
-Demo học tập – tùy chỉnh tự do. (Chưa khai báo license chính thức.)
-
-## 🙋 Hỗ trợ / Góp ý
-Mở Issue hoặc tạo Pull Request nếu muốn cải thiện.
+## 10. License
+MIT (xem LICENSE).
 
 ---
-### EN (Summary for Recruiters)
-Learning-focused MERN ecommerce demo showcasing: dynamic category navigation, context-driven state (cart/wishlist), deterministic data seeding, clean component structure, and pragmatic architectural decisions. Designed to illustrate front-end + back-end integration patterns and readiness for extension (auth, admin, scalability).
+Feel free to fork & extend. PRs welcome.
 
-Enjoy building & customizing! 🤖

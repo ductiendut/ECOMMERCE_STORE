@@ -1,0 +1,128 @@
+
+
+.landing__container {
+    width: 100%;
+    min-height: 520px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    background: var(--color-bg-hero);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Decorative blueprint + glow background on left side */
+.landing__container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 60%;
+    background:
+    radial-gradient(circle at 35% 35%, rgba(230,57,70,0.25), rgba(13,27,42,0) 60%),
+    url('../../asset/bg/blueprint-grid.svg'); /* using src asset so bundler can resolve */
+    background-size: cover, 640px 640px;
+    background-repeat: no-repeat, repeat;
+    background-position: center, top left;
+    opacity: .75;
+    mix-blend-mode: screen;
+    mask: linear-gradient(90deg,#000 70%, transparent);
+    pointer-events: none;
+    z-index: 0;
+}
+
+
+.landing__header a {
+    text-decoration: none;
+    color: var(--color-text-light);
+}
+
+.landing__header__container {
+    width: 40%;
+    height: auto;
+    min-height: 450px;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+}
+
+.landing__header {
+    height: 100%;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    position: relative;
+}
+
+.landing__header::before {
+    content: "";
+    position: absolute;
+    inset: -25px -30px -25px -35px;
+    background: rgba(13,27,42,0.55);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 22px;
+    z-index: -1;
+}
+
+.landing__header__main {
+    font-size: 3.4rem;
+    font-weight: 800;
+    line-height: 1.05;
+    background: linear-gradient(90deg,#ffffff,#cfd9e5,#ffffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.landing__header__discount {
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: var(--color-accent-soft);
+}
+
+.landing__button {
+    width: 60%;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.landing__image__container {
+    width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.landing__image {
+        height: auto;
+        width: 82%;
+        max-width: 560px;
+        filter: drop-shadow(0 12px 35px rgba(0,0,0,.55));
+        animation: floatY 6s ease-in-out infinite;
+}
+
+@keyframes floatY {
+    0%,100% { transform: translateY(0px); }
+    50% { transform: translateY(-14px); }
+}
+
+
+@media screen and (max-width: 850px) {
+    .landing__image__container{
+       display: none;
+    }
+}

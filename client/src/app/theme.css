@@ -1,0 +1,47 @@
+/* Global theme overrides for Bandai/Gundam styling */
+:root {
+  --color-primary: #0d1b2a; /* deep navy */
+  --color-primary-alt: #1b263b;
+  --color-accent: #e63946; /* red accent */
+  --color-accent-soft: #ff6b6b;
+  --color-bg-hero: linear-gradient(135deg,#0d1b2a 0%, #1b263b 45%, #222f43 100%);
+  --color-text-light: #f1f5f9;
+  --color-border: #2e3f55;
+  --font-display: 'Orbitron', 'Rajdhani', system-ui, sans-serif;
+  --font-sans: 'Rajdhani', system-ui, sans-serif;
+}
+
+body {
+  background-color: #0b1522;
+  color: var(--color-text-light);
+  font-family: var(--font-sans);
+}
+
+.button-accent {
+  --glow: 0 0 6px rgba(230,57,70,.55), 0 0 18px rgba(230,57,70,.25);
+  background: linear-gradient(135deg,var(--color-accent) 0%, var(--color-accent-soft) 100%);
+  color: #fff;
+  border: 2px solid var(--color-accent);
+  border-radius: 14px;
+  padding: 10px 30px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  transition: .3s;
+  box-shadow: var(--glow);
+}
+.button-accent:hover {
+  background: #111927;
+  color: var(--color-accent);
+  box-shadow: 0 0 4px rgba(230,57,70,.4);
+}
+
+.button-accent:active { transform: translateY(1px); }
+
+.section-title-line {
+  width: 200px;
+  height: 6px;
+  background: var(--color-accent);
+  border-radius: 25px;
+}

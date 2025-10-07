@@ -1,0 +1,17 @@
+
+
+/* Minimal footer (reset) */
+.ft { margin-top:60px; background:#0d1b2a; padding:40px 0 18px; font-size:.85rem; color:#c7d2dc; }
+.ft__inner { width:min(1100px,92%); margin:0 auto; display:flex; flex-wrap:wrap; gap:40px; align-items:flex-start; }
+.ft__brand { flex:1 1 220px; }
+.ft__logo { margin:0 0 8px; font-family:var(--font-display); font-size:1.9rem; letter-spacing:.5px; color:#fff; }
+.ft__logo span { color:var(--color-accent); }
+.ft__tag { margin:0 0 10px; color:#9fb0c3; font-size:.78rem; }
+.ft__links { flex:1 1 160px; display:flex; flex-direction:column; gap:6px; }
+.ft__links a { color:#d5dee7; text-decoration:none; transition:.25s; }
+.ft__links a:hover { color:var(--color-accent); }
+.ft__contact { flex:1 1 200px; }
+.ft__contact a { color:var(--color-accent); text-decoration:none; }
+.ft__contact a:hover { text-decoration:underline; }
+.ft__bottom { margin-top:30px; text-align:center; font-size:.7rem; color:#7d8a97; border-top:1px solid #1c2b3a; padding-top:14px; }
+@media (max-width:700px){ .ft__inner { flex-direction:column; gap:28px; } .ft__logo { font-size:1.6rem; } }
